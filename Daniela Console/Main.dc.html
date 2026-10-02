@@ -1,0 +1,189 @@
+<!doctype html>
+<html lang="en">
+<head>
+<meta charset="utf-8">
+<title>Supervisor Handover</title>
+<script src="./vendor/react.js"></script>
+<script src="./vendor/react-dom.js"></script>
+<script src="./support.js"></script>
+</head>
+<body>
+<x-dc>
+<helmet>
+<link rel="stylesheet" href="https://fonts.googleapis.com/css2?family=IBM+Plex+Sans:wght@400;500;600;700&amp;display=swap">
+<style>
+body{margin:0;background:#0a0b0a;font-family:'IBM Plex Sans',sans-serif;font-variant-numeric:tabular-nums}
+*{font-family:'IBM Plex Sans',sans-serif;font-variant-numeric:tabular-nums}
+a{color:#8a8d84}a:hover{color:#e6e6e0}
+.ghost{font-family:inherit;font-size:13px;font-weight:500;color:#d4d5cd;background:transparent;border:1px solid rgb(51,54,47);padding:0 14px;height:32px;letter-spacing:0.02em;cursor:pointer}
+.ghost:hover{border-color:rgb(110,114,104);color:#ffffff}
+.handover{cursor:not-allowed}
+.handover:hover{background:rgb(20,21,16);border-color:rgb(51,54,47);color:rgb(92,96,88)}
+</style>
+</helmet>
+<div style="width: 1920px; height: 1080px; box-sizing: border-box; background: #0a0b0a; color: #e6e6e0; font-family: 'IBM Plex Sans', sans-serif; font-variant-numeric: tabular-nums; display: flex; flex-direction: column; overflow: hidden">
+
+<!-- TOP BAR -->
+<header style="height: 56px; flex-shrink: 0; display: flex; align-items: center; border-bottom: 1px solid rgb(51,54,47); background: rgb(16,17,16); padding: 0 24px; font-size: 14px; gap: 0">
+<div style="display: flex; align-items: baseline; gap: 12px; padding-right: 24px; border-right: 1px solid rgb(51,54,47)">
+<span style="font-weight: 700; letter-spacing: 0.12em; font-size: 15px">NORTHGATE TERMINAL</span>
+<span style="color: #8a8d84; letter-spacing: 0.1em; font-size: 13px">· PERIMETER OPS</span>
+</div>
+<div style="padding: 0 24px; border-right: 1px solid rgb(51,54,47); letter-spacing: 0.06em">
+<span style="color: #8a8d84">UTC</span> <span style="font-weight: 600">05:46:12Z</span>
+</div>
+<div style="padding: 0 24px; border-right: 1px solid rgb(51,54,47); letter-spacing: 0.06em">
+<span style="color: #8a8d84">SUPERVISOR</span> <span style="font-weight: 600">SV-1104 · D. PETROVA</span>
+</div>
+<div style="padding: 0 24px; letter-spacing: 0.06em">
+<span style="color: #8a8d84">SHIFT C 22:00–06:00 ·</span> <span style="color: #f2c12e; font-weight: 600">ENDS IN 00:14</span>
+</div>
+<div style="margin-left: auto; display: flex; align-items: center; gap: 10px; height: 34px; padding: 0 16px; border: 1px solid #e8442f; background: rgba(232,68,47,0.10); color: #ff5a44; font-weight: 600; letter-spacing: 0.14em; font-size: 13px">
+<span style="width: 9px; height: 9px; background: #ff5a44; display: inline-block"></span>
+HANDOVER BLOCKED
+</div>
+</header>
+
+<!-- MAIN -->
+<main style="flex-grow: 1; display: grid; grid-template-columns: 7fr 3fr; min-height: 0">
+
+<!-- UNRESOLVED -->
+<section style="display: flex; flex-direction: column; border-right: 1px solid rgb(51,54,47); min-height: 0">
+<div style="height: 48px; flex-shrink: 0; display: flex; align-items: center; justify-content: space-between; padding: 0 24px; border-bottom: 1px solid rgb(51,54,47); background: rgb(16,17,16)">
+<h2 style="margin: 0; font-size: 13px; font-weight: 600; letter-spacing: 0.14em">UNRESOLVED AT HANDOVER</h2>
+<span style="font-size: 12px; color: #8a8d84; letter-spacing: 0.1em">SORTED BY PRIORITY · AGE</span>
+</div>
+<div style="height: 44px; flex-shrink: 0; display: flex; align-items: center; gap: 20px; padding: 0 24px; border-bottom: 1px solid rgb(51,54,47); background: rgb(20,21,16); font-size: 13px; letter-spacing: 0.08em">
+<span style="font-weight: 600">14 UNRESOLVED</span>
+<span style="color: #565a52">·</span>
+<span style="color: #8a8d84">4 ACKNOWLEDGED</span>
+<span style="color: #565a52">·</span>
+<span style="color: #ff5a44; font-weight: 600">10 UNACK</span>
+</div>
+
+<div role="table" style="width: 100%; font-size: 14px">
+<div role="row" style="display: grid; grid-template-columns: 120px 90px 160px 220px 90px 110px 1fr; align-items: center; height: 40px; padding: 0 24px; border-bottom: 1px solid rgb(51,54,47); color: #8a8d84; font-size: 11px; letter-spacing: 0.14em; font-weight: 500">
+<span role="columnheader">ID</span><span role="columnheader">ZONE</span><span role="columnheader">PRIORITY</span><span role="columnheader">OWNER</span><span role="columnheader">AGE</span><span role="columnheader">STATE</span><span role="columnheader">ACTIONS</span>
+</div>
+<sc-for list="{{rows}}" as="r">
+<div role="row" style="display: grid; grid-template-columns: 120px 90px 160px 220px 90px 110px 1fr; align-items: center; height: 60px; padding: 0 24px; border-bottom: 1px solid rgb(37,39,34)">
+<span role="cell" style="font-weight: 600; letter-spacing: 0.04em">{{r.id}}</span>
+<span role="cell" style="color: #b9bbb2">{{r.zone}}</span>
+<span role="cell">
+<span style="display: inline-flex; align-items: center; gap: 9px; font-weight: 600; font-size: 13px; letter-spacing: 0.08em; color: {{r.color}}">
+<span style="width: 9px; height: 9px; background: {{r.color}}; border-radius: {{r.radius}}; transform: {{r.rot}}; display: inline-block"></span>
+{{r.pri}}
+</span>
+</span>
+<span role="cell"><span style="font-weight: 500">{{r.owner}}</span> <span style="color: #8a8d84">· {{r.name}}</span></span>
+<span role="cell" style="font-weight: 600; color: {{r.ageColor}}">{{r.age}}</span>
+<span role="cell"><span style="display: inline-block; font-size: 12px; font-weight: 600; letter-spacing: 0.1em; padding: 3px 8px; border: 1px solid {{r.stateBorder}}; color: {{r.stateColor}}">{{r.state}}</span></span>
+<span role="cell" style="display: flex; gap: 8px">
+<button class="ghost" type="button">Close with reason</button>
+<button class="ghost" type="button">Reassign</button>
+</span>
+</div>
+</sc-for>
+</div>
+<div style="height: 48px; flex-shrink: 0; display: flex; align-items: center; justify-content: space-between; padding: 0 24px; color: #8a8d84; font-size: 13px; letter-spacing: 0.08em">
+<span style="display: inline-flex; align-items: center; gap: 10px"><span style="color: #f2c12e">▾</span> 6 MORE BELOW FOLD</span>
+<span>8 OF 14 SHOWN</span>
+</div>
+</section>
+
+<!-- OPERATOR LOAD -->
+<section style="display: flex; flex-direction: column; background: rgb(16,17,16); min-height: 0">
+<div style="height: 48px; flex-shrink: 0; display: flex; align-items: center; justify-content: space-between; padding: 0 24px; border-bottom: 1px solid rgb(51,54,47)">
+<h2 style="margin: 0; font-size: 13px; font-weight: 600; letter-spacing: 0.14em">OPERATOR LOAD</h2>
+<span style="font-size: 12px; color: #8a8d84; letter-spacing: 0.1em">4 ON SHIFT</span>
+</div>
+<div style="height: 44px; flex-shrink: 0; display: grid; grid-template-columns: 1fr 80px 80px; align-items: center; padding: 0 24px; border-bottom: 1px solid rgb(51,54,47); background: rgb(20,21,16); font-size: 11px; color: #8a8d84; letter-spacing: 0.14em">
+<span>OPERATOR</span><span style="text-align: right">OPEN</span><span style="text-align: right">ACK</span>
+</div>
+
+<div style="display: grid; grid-template-columns: 1fr 80px 80px; align-items: center; padding: 18px 24px; border-bottom: 1px solid rgb(51,54,47); border-left: 3px solid #e8442f; background: rgba(232,68,47,0.07)">
+<div style="display: flex; flex-direction: column; gap: 6px">
+<span style="font-weight: 600; letter-spacing: 0.04em">OP-2291 · J. MOREAU</span>
+<span style="display: inline-flex; align-items: center; gap: 8px; color: #ff5a44; font-size: 12px; font-weight: 600; letter-spacing: 0.14em">
+<svg width="14" height="13" viewBox="0 0 14 13" aria-hidden="true"><path d="M7 1 L13 12 H1 Z" fill="none" stroke="#ff5a44" stroke-width="1.6" stroke-linejoin="round"></path><path d="M7 5 V8.2 M7 9.8 V10" stroke="#ff5a44" stroke-width="1.6" stroke-linecap="round"></path></svg>
+ABOVE THRESHOLD
+</span>
+</div>
+<span style="text-align: right; font-size: 26px; font-weight: 600; color: #ff5a44">12</span>
+<span style="text-align: right; font-size: 18px; color: #b9bbb2">3</span>
+</div>
+
+<sc-for list="{{ops}}" as="o">
+<div style="display: grid; grid-template-columns: 1fr 80px 80px; align-items: center; padding: 18px 24px 18px 27px; border-bottom: 1px solid rgb(51,54,47)">
+<div style="display: flex; flex-direction: column; gap: 6px">
+<span style="font-weight: 600; letter-spacing: 0.04em">{{o.label}}</span>
+<span style="color: #8a8d84; font-size: 12px; letter-spacing: 0.14em">WITHIN THRESHOLD</span>
+</div>
+<span style="text-align: right; font-size: 26px; font-weight: 500">{{o.open}}</span>
+<span style="text-align: right; font-size: 18px; color: #b9bbb2">{{o.ack}}</span>
+</div>
+</sc-for>
+
+<p style="margin: 0; padding: 16px 24px; font-size: 12px; color: #8a8d84; letter-spacing: 0.06em">threshold 8 open per operator</p>
+</section>
+</main>
+
+<!-- BOTTOM BAR -->
+<footer style="height: 104px; flex-shrink: 0; display: flex; align-items: center; justify-content: space-between; padding: 0 24px; border-top: 1px solid rgb(51,54,47); background: rgb(16,17,16)">
+<p style="margin: 0; color: #8a8d84; font-size: 15px; letter-spacing: 0.02em">Handover cannot complete while items remain unresolved</p>
+<div style="display: flex; align-items: center; gap: 20px">
+<span style="font-size: 12px; color: #6a6e64; letter-spacing: 0.12em">0 OF 14 RESOLVED</span>
+<button class="handover" type="button" disabled="" aria-disabled="true" style="font-family: inherit; height: 64px; padding: 0 44px; display: inline-flex; align-items: center; gap: 14px; background: rgb(20,21,16); border: 1px solid rgb(51,54,47); color: rgb(92,96,88); font-size: 17px; font-weight: 600; letter-spacing: 0.18em">
+<svg width="14" height="16" viewBox="0 0 14 16" aria-hidden="true"><rect x="1.5" y="7" width="11" height="8" fill="none" stroke="rgb(92,96,88)" stroke-width="1.5"></rect><path d="M4 7 V4.5 a3 3 0 0 1 6 0 V7" fill="none" stroke="rgb(92,96,88)" stroke-width="1.5"></path></svg>
+COMPLETE HANDOVER
+</button>
+</div>
+</footer>
+</div>
+</x-dc>
+<script type="text/x-dc" data-dc-script data-props='{"$preview":{"width":1920,"height":1080}}'>
+class Component extends DCLogic {
+renderVals() {
+var P = {
+CRITICAL: { color: '#ff5a44', radius: '0', rot: 'none' },
+HIGH: { color: '#ff8a1f', radius: '0', rot: 'none' },
+MEDIUM: { color: '#f2c12e', radius: '0', rot: 'rotate(45deg) scale(0.85)' },
+LOW: { color: '#3fa2ff', radius: '50%', rot: 'none' }
+};
+var M = { owner: 'OP-2291', name: 'J. MOREAU' };
+var N = { owner: 'OP-2288', name: 'K. NILSEN' };
+var raw = [
+['A-4471', 'Z14', 'CRITICAL', M, '00:37', 'UNACK'],
+['A-4468', 'Z13', 'CRITICAL', M, '02:32', 'UNACK'],
+['A-4466', 'Z15', 'HIGH', M, '01:54', 'UNACK'],
+['A-4462', 'Z09', 'HIGH', N, '03:09', 'ACK'],
+['A-4460', 'Z12', 'MEDIUM', M, '02:41', 'UNACK'],
+['A-4455', 'Z22', 'MEDIUM', N, '03:43', 'ACK'],
+['A-4453', 'Z04', 'LOW', M, '02:18', 'UNACK'],
+['A-4449', 'Z08', 'LOW', N, '04:29', 'UNACK']
+];
+var rows = raw.map(function (a) {
+var p = P[a[2]];
+var unack = a[5] === 'UNACK';
+return {
+id: a[0], zone: a[1], pri: a[2], color: p.color, radius: p.radius, rot: p.rot,
+owner: a[3].owner, name: a[3].name, age: a[4],
+ageColor: a[2] === 'CRITICAL' ? '#ff5a44' : '#e6e6e0',
+state: a[5],
+stateColor: unack ? '#ff8a1f' : '#8a8d84',
+stateBorder: unack ? 'rgba(255,138,31,0.6)' : 'rgb(51,54,47)'
+};
+});
+return {
+rows: rows,
+ops: [
+{ label: 'OP-2288 · K. NILSEN', open: 4, ack: 1 },
+{ label: 'OP-2294 · M. HALE', open: 3, ack: 0 },
+{ label: 'OP-2297 · S. ARVIDSEN', open: 2, ack: 0 }
+]
+};
+}
+}
+</script>
+</body>
+</html>
